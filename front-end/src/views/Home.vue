@@ -1,7 +1,14 @@
 <template>
   <div class="home">
-    <div class="coin">
-      <img alt="Vue logo" src="../assets/buffalo.png" width="100px" class="mx-auto my-4">
+    <div class="coin-wrapper">
+      <div class="coin">
+        <div class="side heads">
+          <img alt="Vue logo" src="../assets/buffalo.png" width="100px" class="mx-auto" style="margin-top: 30px;">
+        </div>
+        <div class="side tails">
+          <span style="font-size: 50px;position: absolute;top: 75px;left: 0;right: 0;">BUFC</span>
+        </div>
+      </div>
     </div>
 
     <button
@@ -21,6 +28,7 @@
       </div>
 
       <div class="mt-4">
+        Available on <span class="text-blue-600">GOERLI</span> network<br>
         Contract address: {{buffContractAddr}}<br>
         Your address: {{account}}<br>
         Your balance: {{balanceOf}} bufc
@@ -34,23 +42,23 @@
           </button>
         </div>
       </div>
+
+      <div class="mx-auto my-10 flex h-32 w-[780px] flex-col rounded-lg bg-white text-black shadow-md">
+        <div class="mt-4">
+          <h1 class="mx-11 my-1 font-bold text-[20px] text-gray-600">Transfer token</h1>
+        </div>
+        <div class="relative flex justify-center space-x-3">
+          <span class="absolute inset-y-1 left-12 flex items-center pl-2">
+          </span>
+          <input v-model="transferValue" class="w-[170px] rounded-lg p-2 hover:outline-blue-400" type="number" placeholder="0.0000 BUFFC" />
+          <input v-model="transferTo" class="w-[400px] rounded-lg p-2 hover:outline-blue-400" type="text" placeholder="Address to" />
+          <button class="w-32 rounded-lg border bg-blue-700 font-medium text-white hover:bg-blue-800" @click="transfer()">
+            {{transferLoading ? 'Transfering...' : 'Transfer'}}
+          </button>
+        </div>
+      </div>
       
       <div v-if="isOwner">
-        <div class="mx-auto my-10 flex h-32 w-[780px] flex-col rounded-lg bg-white text-black shadow-md">
-          <div class="mt-4">
-            <h1 class="mx-11 my-1 font-bold text-[20px] text-gray-600">Transfer token</h1>
-          </div>
-          <div class="relative flex justify-center space-x-3">
-            <span class="absolute inset-y-1 left-12 flex items-center pl-2">
-            </span>
-            <input v-model="transferValue" class="w-[170px] rounded-lg p-2 hover:outline-blue-400" type="number" placeholder="0.0000 BUFFC" />
-            <input v-model="transferTo" class="w-[400px] rounded-lg p-2 hover:outline-blue-400" type="text" placeholder="Address to" />
-            <button class="w-32 rounded-lg border bg-blue-700 font-medium text-white hover:bg-blue-800" @click="transfer()">
-              {{transferLoading ? 'Transfering...' : 'Transfer'}}
-            </button>
-          </div>
-        </div>
-
         <div class="mx-auto my-14 flex h-32 w-[780px] flex-col rounded-lg bg-white text-black shadow-md">
           <div class="mt-4">
             <h1 class="mx-11 my-1 font-bold text-[20px] text-gray-600">Mint token</h1>
@@ -209,13 +217,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  .coin{
-    width: 180px;
-    height: 180px;
-    border: 1px solid;
-    border-radius: 50%;
-    margin: 15px auto;
-  }
-</style>
